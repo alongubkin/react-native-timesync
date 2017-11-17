@@ -8,7 +8,6 @@
 
 import * as util from './util.js';
 import * as stat from './stat.js';
-import * as request from './request/request';
 import emitter from './emitter.js';
 var Promise = require('./Promise');
 
@@ -53,19 +52,6 @@ export function create(options) {
      * @param {*} data
      */
     send: function (to, data) {
-      try {
-        request.post(to, data, function(err, res) {
-          if (err) {
-            emitError(err);
-          }
-          else {
-            timesync.receive(to, res);
-          }
-        }, timesync.options.timeout);
-      }
-      catch (err) {
-        emitError(err);
-      }
     },
 
     /**
